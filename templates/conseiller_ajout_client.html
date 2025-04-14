@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Ajout Client{% endblock %}
+{% block content %}
+
+<div>
+    <h1>Ajout Client</h1>
+</div>
+
+
+{% if error %}
+<p style="color:red;">{{ error }}</p>
+{% endif %}
+
+<div class="form-container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, msg in messages %}
+                <div class="flash {{ category }}">{{ category }} : {{ msg }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="post" id="formAjoutClient">
+        <p><label>Nom :</label> <input type="text" name="nom" pattern="[A-Za-zÀ-ÿ\- ]+" required></p>
+        <p><label>Prénom :</label> <input type="text" name="prenom" pattern="[A-Za-zÀ-ÿ\- ]+" required></p>
+        <p><label>Sexe :</label>
+            <select name="sexe" required>
+                <option value="Homme">Homme</option>
+                <option value="Femme">Femme</option>
+            </select>
+        </p>
+        <p><label>Email :</label> <input type="email" name="mail"></p>
+        <p><label>Profession :</label> <input type="text" name="profession" required></p>
+        <p>
+            <label for="etat_civil">État civil :</label>
+            <select name="etat_civil" id="etat_civil" required>
+                <option value="Célibataire">Célibataire</option>
+                <option value="Marié(e)">Marié(e)</option>
+                <option value="Divorcé(e)">Divorcé(e)</option>
+                <option value="Veuf(ve)">Veuf(ve)</option>
+            </select>
+        </p>
+        
+
+        <p>
+            <label for="situation_habitation">Situation d'habitation :</label>
+            <select name="situation_habitation" id="situation_habitation" required>
+                <option value="Locataire">Locataire</option>
+                <option value="Propriétaire">Propriétaire</option>
+            </select>
+        </p>
+        
+
+        <p>
+            <label for="statut_canada">Statut Canada :</label>
+            
+            <select name="statut_canada" id="statut_canada" required>
+                <option value="Canadien">Canadien</option> 
+                <option value="Résident permanent">Résident permanent</option>
+                <option value="Etudiant international">Etudiant international</option>
+                <option value="Personne protégée">Personne protégée</option>
+            
+            </select>
+        </p>
+
+
+        <p><label>NAS :</label> <input type="text" name="nas" id="nasInputClient" required></p>
+        <p><label>Adresse :</label> <input type="text" name="adresse"></p>
+        <p><label>Revenu annuel :</label> <input type="number" name="revenu_annuel" step="0.01" required></p>
+        <p><label>Langue :</label>
+            <select name="langue" required>
+                <option value="Français">Français</option>
+                <option value="Anglais">Anglais</option>
+                <option value="Bilingue">Bilingue</option>
+            </select>
+        </p>
+        <p><input type="submit" value="Valider"></p>
+    </form>
+</div>
+
+{% endblock %}

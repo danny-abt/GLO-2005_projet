@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Modifier mon profil{% endblock %}
+
+{% block content %}
+        <div>
+            <h1>Contrats</h1>
+        </div>
+
+         <p>
+            <a href="{{ url_for('conseiller_ajout_contrat') }}">Ajout contrat</a>
+        </p>
+
+        <form method = "post">
+                <p>
+                    <input type = "text" name = "search" id="search">
+                    <input type="submit" value="Valider" />
+                </p>
+
+        </form>
+        {% for contrat in contrats %}
+            <p>
+                <a href="/profilcontrat/{{ contrat.numero }}">Contrat {{ contrat.get('numero') }}</a>
+            </p>
+        {% endfor %}
+    {% endblock %}

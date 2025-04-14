@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Liste des Conseillers{% endblock %}
+
+{% block content %}
+
+<div class="no-animation">
+    <h2 class="title">Liste des Conseillers</h2>
+  
+    <form method="GET" action="{{ url_for('admin_conseillers') }}" style="margin-bottom: 10px;">
+      <input type="text" name="recherche" placeholder="Rechercher par NAS, nom ou numéro de permis"
+             value="{{ request.args.get('recherche', '') }}" >
+        <button type="submit" class="btn-secondary">Rechercher</button>
+
+    </form>
+  </div>
+  
+  <br>
+  <br>
+  
+  
+
+
+{% if conseillers %}
+    <div class="conseillers-list">
+        {% for c in conseillers %}
+            <div class="conseiller-card">
+                <div class="conseiller-info">
+                    <p><strong> {{ c.prenom }} {{ c.nom }}</strong></p>
+                    <a href="{{ url_for('admin_view_conseiller', id=c.id) }}" class="view-btn">Voir profil</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>Aucun conseiller trouvé.</p>
+{% endif %}
+<div class="create-btn-container" style="position: absolute; top: 50px; right: 80px;">
+    <a href="{{ url_for('admin_create_conseiller') }}">
+        <button class="create-btn">Créer un conseiller</button>
+    </a>
+  </div>
+  
+
+
+    <br>
+
+ 
+</div>
+
+{% endblock %}

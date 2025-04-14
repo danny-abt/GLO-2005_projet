@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Modifier Connexion{% endblock %}
+{% block content %}
+<h2>Modifier mes informations de connexion</h2>
+
+{% if error %}
+    <p style="color:red;">{{ error }}</p>
+{% endif %}
+{% if success %}
+    <p style="color:green;">{{ success }}</p>
+{% endif %}
+<script>
+    function togglePassword() {
+        var field = document.getElementById("password");
+        field.type = field.type === "password" ? "text" : "password";
+    }
+</script>
+
+
+<form method="post" id="conseiller_edit_connexion">
+
+    <label>Nom d'utilisateur</label>
+    <input type="text" name="username" value="{{ user.username }}" required>
+
+    <label>Email</label>
+    <input type="email" name="email" value="{{ user.email }}" required>
+
+    <p>
+        <label for="password">Nouveau mot de passe</label>
+        <input type="password" name="password" id="password" required>
+        <input type="checkbox" onclick="togglePassword()"> Afficher mot de passe
+    </p>
+    
+
+    <input type="submit" value="Mettre à jour">
+</form>
+{% endblock %}

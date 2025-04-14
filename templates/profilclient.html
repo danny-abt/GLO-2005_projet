@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Profils Clients{% endblock %}
+
+{% block content %}
+
+        <div>
+            <h1 style="text-align: center;">Client : {{client.get('nom')}} {{client.get('prenom')}}</h1>
+        </div>
+
+        <br>
+
+  <div class="card-grid">
+    <div class="card"><strong>Mail</strong><br>{{client.get('mail')}}</div>
+    <div class="card"><strong>Revenu annuel</strong><br>{{client.get('revenu_annuel')}}</div>
+    <div class="card"><strong>Etat civil</strong><br>{{ client.get('etat_civil') }}</div>
+    <div class="card"><strong>Situation habitation</strong><br>{{client.get('situation_habitation')}} </div>
+    <div class="card"><strong>Sexe</strong><br>{{client.get('sexe')}}</div>
+    <div class="card"><strong>Langue</strong><br>{{client.get('langue')}}</div>
+    <div class="card"><strong>Profession</strong><br>{{client.get('profession')}}</div>
+    <div class="card"><strong>Statut canada</strong><br>{{client.get('Statut_canada')}}</div>
+    <div class="card"><strong>NAS</strong><br>{{client.get('nas')}}</div>
+    <div class="card"><strong>Adresse</strong><br>{{client.get('adresse')}}</div>
+  </div>
+
+
+
+  <div>
+    <p><a class="btn-secondary" href="{{url_for('modifier_client', id=client.get('id'))}}">Modifier Profil</a></p>
+</div>
+
+<div>
+    <p><a class="btn-secondary" style="background-color: rgb(183, 40, 40); color: white;" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce client ?');" href="{{url_for('supprimer_client', id=client.get('id'))}}">Supprimer Clients</a></p>
+</div>
+<br>
+{% if contrats %}
+        {% for contrat in contrats %}
+        
+            <div>
+                <p>
+                    <a href="/profilcontrat/{{ contrat.numero }}">Contrat {{ contrat.get('numero') }}</a>
+                </p>
+            </div>
+        {% endfor %}
+    {% else %}
+    <p>
+        Aucun contrat pour ce client !
+    </p>
+    {% endif %}
+
+    {% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Modifier Contrat{% endblock %}
+
+{% block content %}
+
+<div>
+    <h1>Modifier Contrat #{{ contrat['numero'] }}</h1>
+</div>
+
+<div class="form-container">
+    <form method="post">
+
+        <p>
+            <label for="nombre_annees">Nombre d'années :</label>
+            <input type="number" name="nombre_annees" id="nombre_annees" value="{{ contrat['nombre_annees'] }}">
+        </p>
+
+        <p>
+            <label for="id_risque">Risque :</label>
+            <select name="id_risque" id="id_risque">
+                <option value="1" {% if contrat['id_risque'] == 1 %}selected{% endif %}>Faible</option>
+                <option value="2" {% if contrat['id_risque'] == 2 %}selected{% endif %}>Modéré</option>
+                <option value="3" {% if contrat['id_risque'] == 3 %}selected{% endif %}>Élevé</option>
+            </select>
+        </p>
+
+        <p>
+            <label for="type_compte">Type de compte :</label>
+            <input type="text" name="type_compte" id="type_compte" value="{{ contrat['type_compte'] }}">
+        </p>
+
+        <p>
+            <label for="taux_interet">Taux d’intérêt :</label>
+            <input type="number" name="taux_interet" id="taux_interet" value="{{ contrat['taux_interet'] }}">
+        </p>
+
+        <p>
+            <label for="beneficiaires">Bénéficiaires :</label>
+            <input type="text" name="beneficiaires" id="beneficiaires" value="{{ contrat['beneficiaires'] }}">
+        </p>
+
+        <p>
+            <label for="mont_initial">Montant initial :</label>
+            <input type="number" name="mont_initial" id="mont_initial" value="{{ contrat['mont_initial'] }}">
+        </p>
+
+        <p>
+            <label for="mont_mensuel">Montant mensuel :</label>
+            <input type="number" name="mont_mensuel" id="mont_mensuel" value="{{ contrat['mont_mensuel'] }}">
+        </p>
+
+        <p>
+            <input type="submit" value="Valider">
+        </p>
+    </form>
+</div>
+
+{% endblock %}

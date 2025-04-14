@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}{{ conseiller.nom }} {{ conseiller.prenom }}{% endblock %}
+
+{% block content %}
+
+{% if conseiller %}
+  <div class="nom-prenom-header">
+    <h2>{{ conseiller.nom }}</h2>
+    <h2>{{ conseiller.prenom }}</h2>
+  </div>
+
+  <div class="card-grid">
+    <div class="card"><strong>Sexe</strong><br>{{ conseiller.sexe }}</div>
+    <div class="card"><strong>Langue</strong><br>{{ conseiller.langue }}</div>
+    <div class="card"><strong>Adresse</strong><br>{{ conseiller.adresse }}</div>
+    <div class="card"><strong>Salaire</strong><br>{{ conseiller.salaire }} $</div>
+    <div class="card"><strong>NAS</strong><br>{{ conseiller.nas }}</div>
+    <div class="card"><strong>Nombre de clients</strong><br>{{ conseiller.nombre_clients }}</div>
+    <div class="card"><strong>Type de Permis</strong><br>{{ conseiller.type_permis }}</div>
+    <div class="card"><strong>Numéro de permis</strong><br>{{ conseiller.numero_permis }}</div>
+  </div>
+
+  <br><br>
+  <form action="{{ url_for('admin_delete_conseiller', id=conseiller.id) }}" method="post" style="text-align: center;">
+    <button class="delete-btn" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce conseiller ?');">
+      Supprimer le conseiller
+    </button>
+  </form>
+
+  <br>
+  <div style="text-align: center;">
+    <a href="{{ url_for('admin_conseillers') }}" class="btn-secondary">← Retour à la liste des conseillers</a>
+  </div>
+
+{% else %}
+  <p>Aucun conseiller trouvé.</p>
+{% endif %}
+
+
+{% endblock %}

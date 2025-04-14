@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Modifiez Votre Profil{% endblock %}
+
+{% block content %}
+
+ 
+{% if error %}
+<p style="color:red;">{{ error }}</p>
+{% endif %}
+
+         <div>
+             <h1>Modifiez Votre Profil</h1>
+         </div>
+ 
+ 
+         <div>
+             <form method = "post">
+ 
+               <p>
+                   <label>Adresse :</label><br>
+                   <input type="text" name="adresse" required>
+               </p>
+ 
+                 <p>
+                     <input type="submit" value="valider" />
+                 </p>
+ 
+             </form>
+         </div>
+     {% endblock %}

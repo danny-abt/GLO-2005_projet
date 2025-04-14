@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Contrat client{% endblock %}
+
+{% block content %}
+
+        <div>
+            <h1>Contrat Client</h1>
+        </div>
+
+        <div>
+            <p><a href="{{url_for('modifier_contrat', numero = contrat.get('numero'))}}">Modifier Contrat</a></p>
+        </div>
+
+        <div>
+            <p><a href="{{url_for('supprimer_contrat', numero=client.get('numero'))}}">Supprimer Contrat</a></p>
+        </div>
+
+        <div>
+            <h1>
+                Contrat
+            </h1>
+        </div>
+
+        <div>
+            <p>
+                Numero : {{contrat.get('numero')}}
+            </p>
+
+            <p>
+                Nas Client : {{contrat.get('nas_client')}}
+            </p>
+
+            <p>
+                Risque : {{contrat.get('risque')}}
+            </p>
+
+            <p>
+                type_compte : {{contrat.get('type_compte')}}
+            </p>
+
+            <p>
+                taux_interet : {{contrat.get('taux_interet')}}
+            </p>
+
+            <p>
+                beneficiaires : {{contrat.get('beneficiaires')}}
+            </p>
+
+            <p>
+                mont_initial : {{contrat.get('mont_initial')}}
+            </p>
+
+            <p>
+                mont_mensuel : {{contrat.get('mont_mensuel')}}
+            </p>
+        </div>
+
+        <div>
+            <p>Client :
+                <a href = "/profilclient/{{client.id}}"> {{client.nom}} - {{client.prenom}}</a>
+            </p>
+        </div>
+
+
+    {% endblock %}

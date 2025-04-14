@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>{% block title %}Mon Application{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f3f4f6;
+            color: #333;
+        }
+
+        .interieur {
+            display: flex;
+            flex-direction: row;
+            min-height: 100vh;
+        }
+
+        .nav_bar {
+            width: 200px;
+            background: #1f2937;
+            display: flex;
+            flex-direction: column;
+            padding: 30px 0;
+            align-items: center;
+            
+        }
+
+        .nav_bar a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 20px 0;
+            font-size: 16px;
+            transition: 0.3s ease;
+        }
+
+        .nav_bar a:hover {
+            color: #60a5fa;
+            transform: scale(1.1);
+        }
+
+        .content {
+    flex-grow: 1;
+    padding: 50px;
+    background: #ffffff;
+    border-radius: 16px;
+    margin: 40px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    animation: fadeIn 0.6s ease;
+    overflow-y: auto;
+    max-height: 90vh;
+}
+
+
+        h1, h2 {
+            color: #1f2937;
+            font-weight: 700;
+        }
+
+        button {
+            background-color: #2563eb;
+            color: white;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        input:not([type="checkbox"]):not([type="radio"]), select, textarea{
+            width: 100%;
+            padding: 14px;
+            margin-top: 8px;
+            margin-bottom: 18px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.03);
+        }
+
+        label {
+            font-weight: 600;
+            color: #374151;
+        }
+
+        form {
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="interieur">
+        <div class="nav_bar">
+            {% if session['role'] == 'admin' %}
+            <a href="{{ url_for('admin_dashboard') }}" class="{% if request.endpoint == 'admin_dashboard' %}active{% endif %}">Mon profil</a>
+            <a href="{{ url_for('admin_conseillers') }}" class="{% if request.endpoint == 'admin_conseillers' %}active{% endif %}">Conseillers</a>
+            <a href="{{ url_for('admin_stats') }}" class="{% if request.endpoint == 'admin_stats' %}active{% endif %}">Statistiques</a>            
+                <a href="{{ url_for('logout') }}">Déconnexion</a>
+            {% elif session['role'] == 'conseiller' %}
+            <a href="{{ url_for('conseiller_dashboard') }}" class="{% if request.endpoint == 'conseiller_dashboard' %}active{% endif %}">Mon profil</a>
+                <a href="{{ url_for('conseiller_ajout_client') }}" class="{% if request.endpoint == 'ajoutclient' %}active{% endif %}">Ajout clients</a>
+                <a href="{{ url_for('clients') }}" class="{% if request.endpoint == 'clients' %}active{% endif %}">Liste clients</a>
+                <a href="{{ url_for('contrat') }}" class="{% if request.endpoint == 'contrat' %}active{% endif %}">Contrat</a>
+                <a href="{{ url_for('logout') }}">Déconnexion</a>
+            {% endif %}
+            
+        </div>
+
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</body>
+</html>

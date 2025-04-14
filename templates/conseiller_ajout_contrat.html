@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}Ajout Contrat{% endblock %}
+
+{% block content %}
+<div>
+    <h1>Ajout Contrat</h1>
+</div>
+
+{% if error %}
+<p style="color:red;">{{ error }}</p>
+{% endif %}
+
+<div class="form-container">
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, msg in messages %}
+            <div class="flash {{ category }}">{{ category }} : {{ msg }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+    <form method="post">
+        <p>
+            <label for="nas_client" >NAS du client :</label>
+            <input type="text" name="nas_client" pattern="\d{9}" maxlength="9" id="nas_client" required title="Veuillez entrez exactement 9 chiffres">
+        </p>
+
+        <p>
+            <label for="nombre_annees">Nombre d'années :</label>
+            <input type="number" name="nombre_annees" id="nombre_annees" required>
+        </p>
+
+        <p>
+            <label for="id_risque">Niveau de risque :</label>
+            <select name="id_risque" id="id_risque" required>
+                <option value="1">Faible</option>
+                <option value="2">Modere</option>
+                <option value="3">Eleve</option>
+            </select>
+        </p>
+
+
+        <p>
+            <label for="type_compte">Type de compte :</label>
+            <select name="type_compte" id="type_compte" required>
+                <option value="cheque">Cheque</option>
+                <option value="Epargne">Epargne</option>
+            </select>
+        </p>
+
+        <p>
+            <label for="taux_interet">Taux d'intérêt :</label>
+            <input type="number" name="taux_interet" id="taux_interet" required>
+        </p>
+
+        <p>
+            <label for="beneficiaires">Bénéficiaires :</label>
+            <input type="text" name="beneficiaires" id="beneficiaires" required>
+        </p>
+
+        <p>
+            <label for="mont_initial">Montant initial :</label>
+            <input type="number" name="mont_initial" id="mont_initial" required>
+        </p>
+
+        <p>
+            <label for="mont_mensuel">Montant mensuel :</label>
+            <input type="number" name="mont_mensuel" id="mont_mensuel" required>
+        </p>
+
+        <p>
+            <input type="submit" value="Valider">
+        </p>
+    </form>
+</div>
+{% endblock %}

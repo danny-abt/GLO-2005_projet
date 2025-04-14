@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Modifier les informations{% endblock %}
+
+{% block content %}
+
+{% if error %}
+    <p style="color:red;">{{ error }}</p>
+{% endif %}
+
+<div>
+    <h1>Modifier les informations de {{ client['nom'] }}</h1>
+</div>
+
+
+
+<div class="form-container">
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+
+    <form method="post">
+
+        <p>
+            <label for="mail">Email :</label>
+            <input type="email" name="mail" id="mail" value="{{ client['mail'] }}">
+        </p>
+
+        <p>
+            <label for="profession">Profession :</label>
+            <input type="text" name="profession" id="profession" value="{{ client['profession'] }}">
+        </p>
+
+        <p>
+    <label for="etat_civil">État civil :</label>
+    <select name="etat_civil" id="etat_civil" required>
+        <option value="Célibataire" {% if client['etat_civil'] == 'Célibataire' %}selected{% endif %}>Célibataire</option>
+        <option value="Marié(e)" {% if client['etat_civil'] == 'Marié(e)' %}selected{% endif %}>Marié(e)</option>
+        <option value="Divorcé(e)" {% if client['etat_civil'] == 'Divorcé(e)' %}selected{% endif %}>Divorcé(e)</option>
+        <option value="Veuf(ve)" {% if client['etat_civil'] == 'Veuf(ve)' %}selected{% endif %}>Veuf(ve)</option>
+    </select>
+</p>
+
+
+        <p>
+            <label for="situation_habitation">Situation habitation :</label>
+            <select name="situation_habitation" id="situation_habitation">
+                <option value="Locataire" {% if client['situation_habitation'] == 'Locataire' %}selected{% endif %}>Locataire</option>
+                <option value="Propriétaire" {% if client['situation_habitation'] == 'Propriétaire' %}selected{% endif %}>Propriétaire</option>
+            </select>
+        </p>
+
+        <p>
+            <label for="statut_canada">Statut Canada :</label>
+            <select name="Statut_canada" id="statut_canada" required>
+                <option value="Canadien" {% if client['Statut_canada'] == 'Canadien' %}selected{% endif %}>Canadien</option>
+                <option value="Résident permanent" {% if client['Statut_canada'] == 'Résident permanent' %}selected{% endif %}>Résident permanent</option>
+                <option value="Etudiant international" {% if client['Statut_canada'] == 'Etudiant international' %}selected{% endif %}>Étudiant international</option>
+                <option value="Personne protégée" {% if client['Statut_canada'] == 'Personne protégée' %}selected{% endif %}>Personne protégée</option>
+            </select>
+        </p>
+        
+        
+        
+
+        <p>
+            <label for="adresse">Adresse :</label>
+            <input type="text" name="adresse" id="adresse" value="{{ client['adresse'] }}">
+        </p>
+
+        <p>
+            <label for="revenu_annuel">Revenu annuel :</label>
+            <input type="number" name="revenu_annuel" id="revenu_annuel" step="0.01" value="{{ client['revenu_annuel'] }}">
+        </p>
+
+        <p>
+            <input type="submit" value="Valider">
+        </p>
+    </form>
+</div>
+
+{% endblock %}

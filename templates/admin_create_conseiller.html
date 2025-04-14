@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Créer un Conseiller{% endblock %}
+
+{% block content %}
+<h2>Créer un nouveau conseiller</h2>
+
+{% if error %}
+<p style="color:red;">{{ error }}</p>
+{% endif %}
+
+<form id="create_Conseiller" method="POST">
+
+    <label>Nom d'utilisateur :</label><br>
+    <input type="text" name="username" required><br><br>
+  
+    <label>Email :</label><br>
+    <input type="email" name="email" required><br><br>
+  
+    <label>Mot de passe :</label><br>
+    <input type="password" name="password" placeholder="min 7 caractères, min 1 chiffre, min 1 majuscule" required><br><br>
+
+    <label>Nom :</label><br>
+    <input type="text" name="nom" pattern="[A-Za-zÀ-ÿ\- ]+" title="Le nom ne peut contenir un chiffre ou des caractères spéciaux" required><br><br>
+
+    <label>Prenom :</label><br>
+    <input type="text" name="prenom" pattern="[A-Za-zÀ-ÿ\- ]+" title="Le prenom ne peut contenir un chiffre ou des caractères spéciaux" required><br><br>
+    
+    
+    <label for="sexe">Sexe :</label>
+<select name="sexe" id="sexe" required>
+    <option value="Homme">Homme</option>
+    <option value="Femme">Femme</option>
+</select>
+
+<br>
+<br>
+
+
+    <label>NAS (9 chiffres, ex: 123456789 ou 123 456 789) :</label><br>
+    <!-- Passage de type "text" pour permettre les espaces -->
+    <input type="text" name="nas" id="nasInputcons" required><br><br>
+    
+
+    <label>Adresse :</label><br>
+    <input type="text" name="adresse" required><br><br>
+
+    <label>Année d'activité :</label><br>
+<input min = "0" type="number" name="annee_activite" required><br><br>
+
+<label>Numéro de permis :</label><br>
+<input type="text" name="numero_permis" pattern="\d{6}" title="Le numéro de permis doit contenir exactement 6 chiffres" required><br><br>
+
+
+<label>Langues :</label><br><br>
+<div style="display: flex; gap: 20px;">
+  <label><input type="checkbox" name="langue[]" value="Français"> Français</label>
+  <label><input type="checkbox" name="langue[]" value="Anglais"> Anglais</label>
+  <label><input type="checkbox" name="langue[]" value="Espagnol"> Espagnol</label>
+</div>
+<br><br>
+
+<label for="type_permis">Type de permis :</label>
+<select name="type_permis" id="type_permis" required>
+    <option value="Financier">Permis Financier</option>
+    <option value="A SAVOIR">Gael Dis nous XD </option>
+</select>
+
+<br><br>
+  
+<label>Salaire :</label><br>
+<div style="display: flex; align-items: center;">
+  <input type="number" name="salaire" step="0.01" min="0" required style="flex:1;">
+  <span style="margin-left: 6px;">$</span>
+</div>
+<br><br>
+
+  
+    <button type="submit">Créer le conseiller</button>
+  </form>
+  
+{% endblock %}

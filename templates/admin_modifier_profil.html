@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Modifier mon profil{% endblock %}
+
+{% block content %}
+<h2>Modifier mon profil</h2>
+
+{% if success %}
+    <p style="color: green;">{{ success }}</p>
+{% endif %}
+
+{% if error %}
+    <p style="color: red;">{{ error }}</p>
+{% endif %}
+
+<form method="POST">
+    <label>Nom :</label><br>
+    <input type="text" pattern="[A-Za-zÀ-ÿ\- ]+" title="Le nom ne peut contenir un chiffre ou des caractères spéciaux" name="nom" value="{{ admin.nom }}" required><br><br>
+
+    <label>Prénom :</label><br>
+    <input type="text" pattern="[A-Za-zÀ-ÿ\- ]+" title="Le nom ne peut contenir un chiffre ou des caractères spéciaux" name="prenom" value="{{ admin.prenom }}" required><br><br>
+
+    <label for="sexe">Sexe :</label>
+    <select name="sexe" id="sexe" required>
+        <option value="Homme" {% if admin.sexe == 'Homme' %}selected{% endif %}>Homme</option>
+        <option value="Femme" {% if admin.sexe == 'Femme' %}selected{% endif %}>Femme</option>
+    </select>
+    <br><br>
+    
+    <label>Adresse :</label><br>
+    <input type="text" name="adresse" value="{{ admin.adresse }}" required><br><br>
+
+    <label>NAS (9 chiffres, ex: 123456789 ou 123 456 789) :</label><br>
+    <input type="text" name="nas" id="nasInput" value="{{ admin.nas }}" required><br><br>
+    
+    <p><label>Langue :</label>
+        <select name="langue" required>
+            <option value="Français">Français</option>
+            <option value="Anglais">Anglais</option>
+            <option value="Bilingue">Bilingue</option>
+        </select>
+
+    <button type="submit">Enregistrer</button>
+</form>
+<a class="btn-secondary" href="{{ url_for('admin_dashboard') }}">← Retour</a>
+{% endblock %}

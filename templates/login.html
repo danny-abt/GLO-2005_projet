@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Connexion{% endblock %}
+
+{% block content %}
+<head>
+    <h1>
+        PROJET APPLICATION web GLO-2005
+    </h1>
+</head>
+<h2>Connexion</h2>
+{% if error %}
+<p style="color:red;">{{ error }}</p>
+{% endif %}
+<form method="POST">
+    <label> username ou Email :</label><br>
+    <input type="text" name="identifier" required><br><br>
+  
+    <label>Mot de passe :</label><br>
+    <input type="password" name="password" required><br><br>
+  
+    <label>POSTE   </label>
+    <br><br>
+    <input type="radio" name="role" value="admin" required> Admin
+    <br><br>
+    <input type="radio" name="role" value="conseiller" required> Conseiller
+    <br><br>
+  
+    <button type="submit">Se connecter</button>
+  </form>
+  
+
+{% endblock %}

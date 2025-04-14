@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Profils{% endblock %}
+
+{% block content %}
+
+        <div>
+            <h1>Profil {{user.nom}}</h1>
+        </div>
+
+
+        
+
+
+
+
+
+        <div>
+            <h1>Profil</h1>
+        </div>
+
+        <div class="profil">
+            <p><strong>
+                Nom : </strong> {{user.nom}}
+            </p>
+
+            <p>
+                <strong>
+                    Prenom : </strong> {{user.prenom}}
+            </p>
+
+            <p>
+                <strong>
+                    Sexe :</strong> {{user.sexe}}
+            </p>
+
+            <p>
+                <strong>
+                    Année d'activité : </strong>{{user.annee_activite}}
+            </p>
+
+            <p>
+                <strong>
+                    Numero Permis : </strong> {{user.numero_permis}}
+            </p>
+
+            <p>
+                <strong>
+                    Langue(s) : </strong> {{user.langue}}
+            </p>
+
+            <p>
+                <strong>
+                    Nombre de client(s) : </strong> {{user.nombre_clients}}
+            </p>
+
+            <p>
+                <strong>
+                    Nas : </strong> {{user.nas}}
+            </p>
+
+            <p>
+                <strong>
+                    Type de permis : </strong> {{user.type_permis}}
+            </p>
+
+            <p>
+                <strong>
+                    Adresse : </strong> {{user.adresse}}
+            </p>
+
+            <p>
+                <strong>
+                    Salaire : </strong> {{user.salaire }}
+            </p>
+
+        </div>
+
+        <div>
+            <a href="{{ url_for('conseiller_edit_connexion') }}" class="btn-secondary">Modifier mes informations de connexion</a>
+            <a href="{{ url_for('conseiller_modifier_profil') }}" class="btn-secondary">Modifier mon profil</a>
+        </div>
+    {% endblock %}

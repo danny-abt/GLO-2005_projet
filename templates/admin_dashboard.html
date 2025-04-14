@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class ="profil">
+<h2>Profil Administrateur</h2>
+
+
+  <p><strong>Nom :</strong> {{ admin.nom }}</p>
+  <p><strong>Prénom :</strong> {{ admin.prenom }}</p>
+  <p><strong>Sexe :</strong> {{ admin.sexe }}</p>
+  <p><strong>Poste :</strong> {{ admin.poste }}</p>
+  <p><strong>Langue :</strong> {{ admin.langue }}</p>
+  <p><strong>Adresse :</strong> {{ admin.adresse }}</p>
+  <p><strong>NAS : </strong>{{ admin.nas }}</p>
+</div>
+<br>
+
+  <a href="{{ url_for('admin_edit_profils') }}">
+    <button  class="btn-secondary" id = "moi" >Modifier mes informations de connexion</button>
+  </a>
+
+  <br>
+<br>
+<a href="{{ url_for('admin_modifier_profil') }}">
+  <button class="btn-secondary">Modifier mon profil</button>
+</a>
+
+{% endblock %}
