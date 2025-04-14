@@ -267,6 +267,18 @@ BEGIN
 END
 """)
 
+cursor.execute("DROP PROCEDURE IF EXISTS verifier_mail_client")
+cursor.execute("""
+CREATE PROCEDURE verifier_mail_client(IN mail VARCHAR(50))
+BEGIN
+    DECLARE nb INT;
+    SELECT COUNT(*) INTO nb FROM users WHERE email = mail;
+    IF nb > 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Adresse courriel déjà utilisée';
+    END IF;
+END
+""")
+
 
 # TRIGGERS : mise à jour du nombre de clients
 cursor.execute("DROP TRIGGER IF EXISTS after_client_insert")

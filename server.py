@@ -552,21 +552,29 @@ def profil_client(id):
 
 #Page pour ajout client
 # Création d'un client
+# Page pour ajout client
+# Création d'un client
 @app.route('/conseiller/ajoutclient', methods=['GET', 'POST'])
 def conseiller_ajout_client():
     if 'role' not in session or session['role'] != 'conseiller':
         return redirect(url_for('login'))
-    
+
     error = None
 
     if request.method == 'POST':
         conn = get_db_connection()
         try:
             with conn.cursor() as cursor:
+                # Vérification NAS
                 cursor.callproc('verifier_nas_client_contrat', (
                     request.form.get('nas'),
                     'clients',
                     session.get('id')
+                ))
+
+                # Vérification mail
+                cursor.callproc('verifier_mail_client', (
+                    request.form.get('mail'),
                 ))
 
                 values = (
@@ -604,14 +612,17 @@ def conseiller_ajout_client():
                 flash(message, "error")
             elif 'Un Admin ne peut pas etre un client' in message:
                 flash(message, "error")
+            elif 'Adresse courriel déjà utilisée' in message or message == 'a':
+                flash("Adresse courriel déjà utilisée", "error")
             return render_template('conseiller_ajout_client.html')
+
         except DataError:
             error = "Erreur lors de l'enregistrement : une donnée est trop longue ou invalide."
 
         finally:
             conn.close()
 
-    return render_template('conseiller_ajout_client.html', error = error)
+    return render_template('conseiller_ajout_client.html', error=error)
 
 
 
