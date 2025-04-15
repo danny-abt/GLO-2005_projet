@@ -23,6 +23,8 @@
     <select name="sexe" id="sexe" required>
         <option value="Homme" {% if admin.sexe == 'Homme' %}selected{% endif %}>Homme</option>
         <option value="Femme" {% if admin.sexe == 'Femme' %}selected{% endif %}>Femme</option>
+        <option value="Femme" {% if admin.sexe == 'Non-binaire' %}selected{% endif %}>Non-binaire</option>
+        
     </select>
     <br><br>
     
