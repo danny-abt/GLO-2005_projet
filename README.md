@@ -15,8 +15,21 @@ Ensuite taper (Pour créer la bd et lancer le serveur) :
 python3 init.py
 ```
 
+
+
+
+Un admin par défaut sera créer : 
+  - son username "Admin"
+  - son password "Admin123"
+Toutes ses informations (connexion et profils) pourront être modifiable.
+
+Lancer le serveur ...
+
+
 ```bash
 python3 server.py
 ```
+
+
 
 
