@@ -491,6 +491,7 @@ def conseiller_edit_connexion():
 
 
 # Liste des clients
+# Liste des clients
 @app.route('/clients', methods=['GET', 'POST'])
 def clients():
     if 'role' not in session or session['role'] != 'conseiller':
@@ -500,12 +501,12 @@ def clients():
     try:
         with conn.cursor() as cursor:
             if request.method == 'POST':
-                search = request.form.get('search')
+                search = f"%{request.form.get('search')}%"
                 cursor.execute("""
                     SELECT cl.id, cl.nom, cl.prenom, cl.sexe, cl.mail, cl.profession, cl.etat_civil, cl.id_conseiller, cl.nas
                     FROM clients cl
                     INNER JOIN conseillers co ON cl.id_conseiller = co.id
-                    WHERE cl.id_conseiller = %s AND (cl.nas = %s OR cl.nom = %s)
+                    WHERE cl.id_conseiller = %s AND (cl.nas LIKE %s OR cl.nom LIKE %s)
                 """, (session['id'], search, search))
                 clients = cursor.fetchall()
             else:
@@ -709,15 +710,26 @@ def contrat():
             if request.method == 'POST':
                 search = request.form.get('search')
                 cursor.execute("""
-                    SELECT * FROM (SELECT * FROM contrats WHERE nas_client IN (
-                        SELECT cl.nas FROM clients cl INNER JOIN conseillers co ON cl.id_conseiller = co.id WHERE co.id = %s
-                    )) AS search WHERE nas_client = %s
-                """, (session['id'], search))
+                    SELECT * FROM (
+                        SELECT * FROM contrats 
+                        WHERE nas_client IN (
+                            SELECT cl.nas 
+                            FROM clients cl 
+                            INNER JOIN conseillers co ON cl.id_conseiller = co.id 
+                            WHERE co.id = %s
+                        )
+                    ) AS search 
+                    WHERE nas_client LIKE %s
+                """, (session['id'], f"%{search}%"))
                 contrats = cursor.fetchall()
             else:
                 cursor.execute("""
-                    SELECT * FROM contrats WHERE nas_client IN (
-                        SELECT cl.nas FROM clients cl INNER JOIN conseillers co ON cl.id_conseiller = co.id WHERE co.id = %s
+                    SELECT * FROM contrats 
+                    WHERE nas_client IN (
+                        SELECT cl.nas 
+                        FROM clients cl 
+                        INNER JOIN conseillers co ON cl.id_conseiller = co.id 
+                        WHERE co.id = %s
                     )
                 """, (session['id'],))
                 contrats = cursor.fetchall()
@@ -725,6 +737,7 @@ def contrat():
         conn.close()
 
     return render_template("contrat.html", contrats=contrats)
+
 
 
 
