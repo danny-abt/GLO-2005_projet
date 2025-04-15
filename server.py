@@ -740,7 +740,13 @@ def profil_contrat(id):
     conn = get_db_connection()
     try:
         with conn.cursor() as cursor:
-            cursor.execute("SELECT * FROM contrats WHERE numero = %s", (id,))
+            cursor.execute("""
+    SELECT cont.*, r.niveau AS risque
+    FROM contrats cont
+    LEFT JOIN risques r ON cont.id_risque = r.id
+    WHERE cont.numero = %s
+""", (id,))
+
             contrat = cursor.fetchone()
             cursor.execute("""
                 SELECT * FROM clients cl INNER JOIN contrats cont ON cl.nas = cont.nas_client WHERE cont.numero = %s
