@@ -3,9 +3,6 @@
 
 {% block content %}
 
-        <div>
-            <h1>Profil {{user.nom}}</h1>
-        </div>
 
 
         
@@ -15,7 +12,7 @@
 
 
         <div>
-            <h1>Profil</h1>
+            <h1> Mon Profil</h1>
         </div>
 
         <div class="profil">
@@ -76,7 +73,7 @@
         </div>
 
         <div>
-            <a href="{{ url_for('conseiller_edit_connexion') }}" class="btn-secondary">Modifier mes informations de connexion</a>
-            <a href="{{ url_for('conseiller_modifier_profil') }}" class="btn-secondary">Modifier mon profil</a>
+            <a style="text-decoration: none;" href="{{ url_for('conseiller_edit_connexion') }}" class="btn-secondary">Modifier mes informations de connexion</a><br>
+            <a style="text-decoration: none;" href="{{ url_for('conseiller_modifier_profil') }}" class="btn-secondary">Modifier mon profil</a>
         </div>
     {% endblock %}

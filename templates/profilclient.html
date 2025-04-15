@@ -33,14 +33,14 @@
 </div>
 <br>
 {% if contrats %}
-        {% for contrat in contrats %}
-        
-            <div>
-                <p>
-                    <a href="/profilcontrat/{{ contrat.numero }}">Contrat {{ contrat.get('numero') }}</a>
-                </p>
-            </div>
-        {% endfor %}
+<div class="contrat-list">
+    {% for contrat in contrats %}
+      <a href="/profilcontrat/{{ contrat.numero }}" class="contrat-box">
+        Contrat {{ contrat.numero }}
+      </a>
+    {% endfor %}
+  </div>
+  
     {% else %}
     <p>
         Aucun contrat pour ce client !

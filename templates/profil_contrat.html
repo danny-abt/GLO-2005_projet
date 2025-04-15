@@ -3,63 +3,25 @@
 
 {% block content %}
 
-        <div>
-            <h1>Contrat Client</h1>
-        </div>
+<div class="contract-details">
+    <h1>Contrat</h1>
 
-        <div>
-            <p><a href="{{url_for('modifier_contrat', numero = contrat.get('numero'))}}">Modifier Contrat</a></p>
-        </div>
+    <div class="info-grid">
+        <div><strong>Numéro :</strong> {{ contrat.get('numero') }}</div>
+        <div><strong>Nas Client :</strong> {{ contrat.get('nas_client') }}</div>
+        <div><strong>Risque :</strong> {{ contrat.get('risque') }}</div>
+        <div><strong>Type de compte :</strong> {{ contrat.get('type_compte') }}</div>
+        <div><strong>Taux d’intérêt :</strong> {{ contrat.get('taux_interet') }}</div>
+        <div><strong>Bénéficiaires :</strong> {{ contrat.get('beneficiaires') }}</div>
+        <div><strong>Montant initial :</strong> {{ contrat.get('mont_initial') }}</div>
+        <div><strong>Montant mensuel :</strong> {{ contrat.get('mont_mensuel') }}</div>
+        <div><strong>Client :</strong> <a href="/profilclient/{{ client.id }}">{{ client.nom }} - {{ client.prenom }}</a></div>
+    </div>
 
-        <div>
-            <p><a href="{{url_for('supprimer_contrat', numero=client.get('numero'))}}">Supprimer Contrat</a></p>
-        </div>
+    <div class="btn-group">
+        <a class="btn-secondary" href="{{ url_for('modifier_contrat', numero=contrat.get('numero')) }}">Modifier Contrat</a>
+        <a class="delete-btn" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce conseiller ?');" href="{{ url_for('supprimer_contrat', numero=client.get('numero')) }}">Supprimer Contrat</a>
+    </div>
+</div>
 
-        <div>
-            <h1>
-                Contrat
-            </h1>
-        </div>
-
-        <div>
-            <p>
-                Numero : {{contrat.get('numero')}}
-            </p>
-
-            <p>
-                Nas Client : {{contrat.get('nas_client')}}
-            </p>
-
-            <p>
-                Risque : {{contrat.get('risque')}}
-            </p>
-
-            <p>
-                type_compte : {{contrat.get('type_compte')}}
-            </p>
-
-            <p>
-                taux_interet : {{contrat.get('taux_interet')}}
-            </p>
-
-            <p>
-                beneficiaires : {{contrat.get('beneficiaires')}}
-            </p>
-
-            <p>
-                mont_initial : {{contrat.get('mont_initial')}}
-            </p>
-
-            <p>
-                mont_mensuel : {{contrat.get('mont_mensuel')}}
-            </p>
-        </div>
-
-        <div>
-            <p>Client :
-                <a href = "/profilclient/{{client.id}}"> {{client.nom}} - {{client.prenom}}</a>
-            </p>
-        </div>
-
-
-    {% endblock %}
+{% endblock %}

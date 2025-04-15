@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Modifier mon profil{% endblock %}
+{% block title %}Contrat{% endblock %}
 
 {% block content %}
         <div>
@@ -7,7 +7,7 @@
         </div>
 
          <p>
-            <a href="{{ url_for('conseiller_ajout_contrat') }}">Ajout contrat</a>
+            <a  href="{{ url_for('conseiller_ajout_contrat') }}" class="btn-secondary">Ajout contrat</a>
         </p>
 
         <form method = "post">
@@ -17,9 +17,17 @@
                 </p>
 
         </form>
-        {% for contrat in contrats %}
-            <p>
-                <a href="/profilcontrat/{{ contrat.numero }}">Contrat {{ contrat.get('numero') }}</a>
-            </p>
-        {% endfor %}
+       
+
+
+
+
+        <div class="contrat-grid">
+            {% for contrat in contrats %}
+              <a href="/profilcontrat/{{ contrat.numero }}" class="contrat-card">
+                Contrat {{ contrat.numero }}
+              </a>
+            {% endfor %}
+          </div>
+       
     {% endblock %}
