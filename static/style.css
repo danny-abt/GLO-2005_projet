@@ -3,6 +3,10 @@ html {
     scroll-behavior: smooth;
 }
 
+.nav_bar {
+    flex-shrink: 0;
+}
+
 
 .active {
     background-color: #6d4e0a;

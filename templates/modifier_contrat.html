@@ -26,8 +26,12 @@
 
         <p>
             <label for="type_compte">Type de compte :</label>
-            <input type="text" name="type_compte" id="type_compte" value="{{ contrat['type_compte'] }}">
+            <select name="type_compte" id="type_compte" required>
+                <option value="cheque" {% if contrat['type_compte'] == 'cheque' %}selected{% endif %}>Cheque</option>
+                <option value="Epargne" {% if contrat['type_compte'] == 'Epargne' %}selected{% endif %}>Epargne</option>
+            </select>
         </p>
+        
 
         <p>
             <label for="taux_interet">Taux d’intérêt :</label>

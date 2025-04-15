@@ -33,7 +33,10 @@
 </div>
 <br>
 {% if contrats %}
+<br>
+<p style="text-align: center;"><strong> LISTE DES CONTRATS</strong></p>
 <div class="contrat-list">
+
     {% for contrat in contrats %}
       <a href="/profilcontrat/{{ contrat.numero }}" class="contrat-box">
         Contrat {{ contrat.numero }}

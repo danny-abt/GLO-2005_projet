@@ -768,6 +768,7 @@ def conseiller_ajout_contrat():
         return redirect(url_for('login'))
     
     error = None
+    success = None
 
     if request.method == 'POST':
         nas_client = request.form['nas_client']
@@ -786,6 +787,7 @@ def conseiller_ajout_contrat():
                     request.form.get('nas_client'), 'contrats', session.get('id')
                 ))
                 #cursor.callproc('verifier_nas_client_contrat', (request.form.get('nas'), 'contrats', session.get('id')))
+                success = "CONTRAT CREE AVEC SUCCESS !"
 
                 cursor.execute("""
                     INSERT INTO contrats (
@@ -796,8 +798,10 @@ def conseiller_ajout_contrat():
                     nas_client, nombre_annees, id_risque, type_compte,
                     taux_interet, beneficiaires, mont_initial, mont_mensuel
                 ))
+                
                 conn.commit()
-                return redirect(url_for('conseiller_ajout_contrat'))
+                
+                return render_template('conseiller_ajout_contrat.html', success = success)
 
         except pymysql.err.OperationalError as error:
             if 'NAS client inexistant ou pas parmi vos clients' in error.args[1]:

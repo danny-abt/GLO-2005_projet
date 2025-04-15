@@ -20,6 +20,10 @@
     {% endif %}
 {% endwith %}
 
+{% if success %}
+<p style="color:green;">{{ success }}</p>
+{% endif %}
+
     <form method="post">
         <p>
             <label for="nas_client" >NAS du client :</label>
