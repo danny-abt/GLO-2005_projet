@@ -12,13 +12,13 @@ app.secret_key = "ma_cle_secrete_flask"  # Clé secrète pour sécuriser les coo
 # Fonction de connexion à MySQL
 def get_db_connection():
     return pymysql.connect(
-        host='localhost',
-        user='root',
-        password='root',     # Mot de passe MySQL
-        db='GLO_PROJET',
-        charset='utf8mb4',   # Pour gérer les caractères spéciaux
-        cursorclass=pymysql.cursors.DictCursor   # Pour accéder aux colonnes par nom(clé valeeur comme dictionnaire) Exemple (user['username'])
-    )
+    host="switchback.proxy.rlwy.net",
+    user="root",
+    password="EjKSwXUkRpBEpLvoTMwwLvWZzigKJzbu",
+    port=42044,
+    database="railway",
+    autocommit=True,
+)
 
 @app.route('/')
 def index():

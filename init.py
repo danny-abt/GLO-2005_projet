@@ -3,16 +3,16 @@ import pymysql
 from werkzeug.security import generate_password_hash
 
 connection = pymysql.connect(
-    host="localhost",
+    host="switchback.proxy.rlwy.net",
     user="root",
-    password="root",
+    password="EjKSwXUkRpBEpLvoTMwwLvWZzigKJzbu",
+    port=42044,
+    database="railway",
     autocommit=True,
 )
 
 cursor = connection.cursor()
-cursor.execute("DROP DATABASE IF EXISTS GLO_PROJET;")
-cursor.execute("CREATE DATABASE IF NOT EXISTS GLO_PROJET;")
-cursor.execute("USE GLO_PROJET;")
+cursor.execute("USE railway;")
 
 # TABLE USERS
 cursor.execute("""
